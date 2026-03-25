@@ -1,0 +1,6 @@
+#ifndef MANAGEMENT_HPP
+#define MANAGEMENT_HPP
+
+# [SDD_HLD_MGMT_001] 
+  
+# [SDD_HLD_MGMT_002]

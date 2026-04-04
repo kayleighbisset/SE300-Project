@@ -22,8 +22,6 @@ struct Event {
 
 // [SDD_HLD_MGMT_001]
 Management::Management() {
-    myEvent = new EventManager();
-    myAttend = new AttendanceSystem();
 }
 
 // [SDD_HLD_MGMT_002]
@@ -53,18 +51,18 @@ void Management::start() {
         cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
         if (choice == 1) {
-            myEvent->createEvent();
+            eventManager.createEvent();
         }
         else if (choice == 2) {
-            myEvent->displayEvents();
+            eventManager.displayEvents();
         }
         else if (choice == 3) {
-            if (!myEvent->hasEvents()) {
+            if (!eventManager.hasEvents()) {
                 cout << "No events exist yet.\n";
             }
             else {
                 int eventNumber;
-                myEvent->displayEvents();
+                eventManager.displayEvents();
 
                 cout << "Select event number: ";
                 cin >> eventNumber;
@@ -78,18 +76,18 @@ void Management::start() {
 
                 cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
-                Event* selectedEvent = myEvent->getEvent(eventNumber - 1);
+                Event* selectedEvent = eventManager.getEvent(eventNumber - 1);
 
                 if (selectedEvent == nullptr) {
                     cout << "Invalid event number.\n";
                 }
                 else {
-                    myAttend->submitAttendance(*selectedEvent);
+                    attendanceSystem.submitAttendance(*selectedEvent);
                 }
             }
         }
         else if (choice == 4) {
-            myAttend->displaySubmissions();
+            attendanceSystem.displaySubmissions();
         }
         else if (choice == 5) {
             cout << "Exiting ARATS.\n";
@@ -100,15 +98,7 @@ void Management::start() {
         }
     }
 }
-
-Management::~Management() {
-    delete myEvent;
-    delete myAttend;
-}
-
-/ =====================================================
-// 3.2 EventManager
-// =====================================================
+// EventManager
 
 EventManager::EventManager() {
 }

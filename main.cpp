@@ -4,8 +4,28 @@
 #include <cstdlib>
 #include <ctime>
 #include <fstream>
+#include <string>
+#include <vector>
+#include <limits>
 using namespace std;
 
+struct Event {
+    string title;
+    string date;
+    string location;
+    string description;
+    vector<string> customFields;
+    string attendanceLink;
+    string qrCode;
+};
+
+struct AttendanceSubmission {
+    string attendeeName;
+    string email;
+    string eventTitle;
+    string eventDate;
+    vector<string> customResponses;
+};
 Manager::Manager() {
     // [SDD_HLD_MGMT_001]
 }

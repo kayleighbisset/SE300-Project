@@ -1,1 +1,6 @@
+#ifndef DUPLICATECHECKER_H
+#define DUPLICATECHECKER_H
 
+#include vector
+#include <string>
+#include "ATTENDANCE

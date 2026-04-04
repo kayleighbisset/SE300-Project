@@ -1,6 +1,17 @@
 #ifndef MANAGEMENT_HPP
 #define MANAGEMENT_HPP
 
-# [SDD_HLD_MGMT_001] 
-  
-# [SDD_HLD_MGMT_002]
+#include "EventManager.hpp"
+#include "AttendanceSystem.hpp"
+
+class Management {
+private:
+    EventManager eventManager;
+    AttendanceSystem attendanceSystem;
+
+public:
+    Management();
+    void start();
+};
+
+#endif

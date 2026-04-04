@@ -10,3 +10,7 @@ class DuplicateChecker {
 public:
   DuplicateChecker();
   bool checkDuplicate(vector<AttendanceRecord>) //to be continued
+
+
+
+#endif

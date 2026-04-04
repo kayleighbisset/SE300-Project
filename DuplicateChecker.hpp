@@ -9,4 +9,4 @@ using namespace std;
 class DuplicateChecker {
 public:
   DuplicateChecker();
-  bool checkDuplicate(vector<AttendanceRecord>)...
+  bool checkDuplicate(vector<AttendanceRecord>) //to be continued

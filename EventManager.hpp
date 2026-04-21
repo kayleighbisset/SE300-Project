@@ -1,10 +1,25 @@
 #ifndef EVENTMANAGER_HPP
 #define EVENTMANAGER_HPP
 
-#include <vector>
 #include <string>
-#include "QRCodeGenerator.h"
+#include <vector>
+#include "QRCodeGenerator.hpp"
 using namespace std;
+
+class Event {
+private:
+    string title;
+    string date;
+    string qrLink;
+
+public:
+    Event();
+    Event(string eventTitle, string eventDate, string link);
+
+    string getTitle();
+    string getDate();
+    string getQRLink();
+};
 
 class EventManager {
 private:

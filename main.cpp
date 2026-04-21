@@ -7,5 +7,10 @@
 #include <string>
 #include <vector>
 #include <limits>
-
 using namespace std;
+
+int main() {
+    Management manager;
+    manager.start();
+    return 0;
+}

@@ -1,7 +1,7 @@
 #ifndef EVENTMANAGER_HPP
 #define EVENTMANAGER_HPP
 
-#include <string>
+#include <cstring>
 #include <vector>
 #include "QRCodeGenerator.hpp"
 using namespace std;

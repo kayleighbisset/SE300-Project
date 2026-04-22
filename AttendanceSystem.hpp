@@ -1,20 +1,20 @@
 #ifndef ATTENDANCESYSTEM_HPP
 #define ATTENDANCESYSTEM_HPP
 
-#include <string>
+#include <cstring>
 #include <vector>
-#include "AttendanceProcessor.hpp"
+#include "AttendanceRecord.hpp"
 using namespace std;
 
 class AttendanceSystem {
 private:
-    AttendanceProcessor attendanceProcessor;
+    AttendanceRecord attendanceRecord;
 
 public:
     AttendanceSystem();
 
     void submitAttendance(string name, string email, string eventTitle, string eventDate, vector<string> customFields);
-    AttendanceProcessor& getProcessor();
+    AttendanceRecord& getRecord();
 };
 
 #endif

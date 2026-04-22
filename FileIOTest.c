@@ -1,8 +1,8 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
+#include <iostream>
+#include <cstdlib>
+#include <cstring>
 
-int main() {
+void IOTest() {
 
   //Reads in input
   char date[50], club[50], otherinfo[50][50], menuChoice[50];
@@ -45,7 +45,6 @@ int main() {
   AttInput = fopen("SampleAttendanceData.csv", "r");
   if (AttInput == NULL) {
     printf("Error: Could not open file.\n");
-    return 0;
   }
   
   while (fgets(line, sizeof(line), AttInput) != NULL) {
@@ -62,7 +61,6 @@ int main() {
   
   if (AttForm == NULL) {
     printf("Error: Could not open file.\n");
-    return 0;
   }
 
   //Writes to the form
@@ -84,5 +82,4 @@ int main() {
   //Closes file
   fclose(AttForm);
 
-  return(0);
 }

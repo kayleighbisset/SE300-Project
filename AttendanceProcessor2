@@ -1,0 +1,80 @@
+#include <iostream>
+#include <vector>
+#include <string>
+#include <bits/stdc++.h>
+using namespace std;
+
+//global variable nameList
+vector<string> nameList;      
+
+//global varriable emailList
+vector<string> emailList;       
+
+//List of new names to be verified and added to the main name list
+vector<string> newNames = {"ari", "lizz", "rat", "fake"};
+//List of new emails to be verified and added to the main name list
+vector<string> newEmails = {"chaia@my.erau.edu", "zurybide@my.erau.edu", "rat@my.erau.edu", "spooky@yahoo.com"};
+
+
+//check if name or email is already in array
+bool duplicateChecker(string checkName)
+{
+  int j;
+  for(j=0; j<nameList.size(); j++)
+  {
+    if(checkName==nameList[j])
+    {
+      return true;
+    }
+  }
+  return false;
+}
+
+
+int main() 
+{
+  int i;
+  
+  for(i = newNames.size()-1; i>=0; i--)
+  {
+    //to add names
+    if(!duplicateChecker(newNames[i]))
+    {
+      nameList.push_back(newNames[i]); //add
+      cout << newNames[i];
+      cout << "\nName sucsesfully added\n";
+    }
+    else
+    {
+      cout << newNames[i];
+      cout << "\nFAIL!! Oh sorry, NEEDS IMPROIVMENT\n";
+    }
+    
+    
+    //to add emails  
+    string testEmail = "@my.erau.edu";
+    if(newEmails[i].length()<13)
+    {
+
+      cout << "\nInvalid Email\n";
+    }
+    else if(!newEmails[i].compare((newEmails[i].length()-12), 13, testEmail) &&!duplicateChecker(newEmails[i]))
+    {
+      nameList.push_back(newEmails[i]); //add
+      cout << newEmails[i];
+      cout << "\n";
+      cout << newEmails[i].substr((newEmails[i].length()-11), 12);
+      cout << "\nEmail sucsesfully added\n";
+    }
+    else
+    {
+      cout << "\n";
+    }
+
+  }
+  
+  
+  return 0;
+  
+}
+

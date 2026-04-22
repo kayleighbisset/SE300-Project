@@ -1,0 +1,13 @@
+//check if name or email is already in array
+bool duplicateChecker(string checkName)
+{
+  int j;
+  for(j=0; j<nameList.size(); j++)
+  {
+    if(checkName==nameList[j])
+    {
+      return true;
+    }
+  }
+  return false;
+}

@@ -1,5 +1,5 @@
 #include "AttendanceRecord.hpp"
-
+#include <vector>
 
 AttendanceRecord::AttendanceRecord() { //intializing
     attendeeName = "";

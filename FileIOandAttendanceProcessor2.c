@@ -132,7 +132,7 @@ int main() {
     AttTest = fopen(outputfile, "r");
   }
 
-  FILE *AttInput = fopen("SampleAttendanceData.csv", "r");
+  FILE *AttInput = fopen(inputfile, "r");
   if (AttInput == NULL) {
     printf("Error: Could not open input file.\n");
     return 1;
@@ -158,7 +158,7 @@ int main() {
   int badCount = attendanceProcessor(namePtrs, emailPtrs, j, badPositions);
 
   // Opens file in write mode
-  FILE *AttForm = fopen("FileIOTest.csv", "w");
+  FILE *AttForm = fopen(outputfile, "w");
   if (AttForm == NULL) {
     printf("Error: Could not open output file.\n");
     return 1;

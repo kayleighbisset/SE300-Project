@@ -1,35 +1,27 @@
-This repository documents the design for an Automated RSO Attendance Tracking System (ARATS). The Automated RSO Attendance Tracking System (ARATS) is a C++ program designed to help RSO officers organize attendance records for club or organization meetings. The current implementation reads attendance data from a CSV file, collects meeting information from the user, and exports the processed attendance records into a new CSV file. Attendance data is imported through a local CSV file.
+Automated RSO Attendance Tracking System (ARATS)
+Project Overview: 
+The Automated RSO Attendance Tracking System (ARATS) is designed to help Registered Student Organization (RSO) officers manage attendance records for events. The project was developed using C++ for system design and structure, following an object-oriented architecture defined in the Software Design Document (SDD). Due to time and integration constraints, the final working implementation of core functionality (file input/output, validation, and export) was completed using a C-based module. The output CSV file will include the attendance records, meeting date, club name, and any additional meeting information entered by the user. 
+Features (Implemented): 
+File input and output using CSV files
+Duplicate detection (names and emails)
+Email validation (@my.erau.edu domain)
+Filtering of invalid attendance entries
+User input for meeting details (date, club, notes)
+Export of processed attendance data to CSV
 
-Build Instructions:
-Open an online C++ compiler.
-Upload or create the following files:
+Required Files:
+For the working system, ensure these files are in the same folder:
+FileIOandAttendanceProcessor3.c
+SampleAttendanceData.csv
+FileIOTest.csv
+
+For the C++ version:
 main.cpp
 Management.cpp
 Management.hpp
 SampleAttendanceData.csv
-Make sure all files are in the same folder/project.
-Compile and run the program.
-Enter the meeting date, club name, and any extra meeting information when prompted.
-After the program runs, check for the output file named 
 
-How to Run: 
-After starting the program, the user will be prompted to enter:
+How to Run:
+Open a terminal/command prompt and make sure all project files are in the same folder. Compile the program, run ARATS.exe, and enter prompts as needed.
 
-The date of the meeting
-The club or organization name
-Any other relevant meeting information
-
-Limitations: 
-This implementation does not currently support:
-
-QR code generation
-Google Forms integration
-Login or role-based access control
-
-Expected Output: 
-If the program runs correctly, it will display:
-
-
-The output CSV file will include the attendance records, meeting date, club name, and any additional meeting information entered by the user.
-
-These features were included in the original design but were not implemented in the final code due to project scope and time constraints.
+Notes: The C implementation contains the complete working functionality (validation, duplicate checking, CSV export). The C++ files represent the SDD-based modular design. The input file (SampleAttendanceData.csv) must exist in the same directory or the program will fail to run.

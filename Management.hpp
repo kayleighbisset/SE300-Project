@@ -7,11 +7,10 @@ using namespace std;
 
 class Management {
 public:
+    // [SDD_HLD_MGMT_001]
     Management();
+    // [SDD_HLD_MGMT_002]
     void start();
-
-private:
-    string removeQuotes(string text);
 };
 
 #endif

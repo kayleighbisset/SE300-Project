@@ -1,135 +1,114 @@
 #include "Management.hpp"
-#include "AttendanceProcessor.hpp"
 #include "FileIOandAttendanceProcessor.hpp"
-#include <iostream>
-#include <fstream>
-#include <sstream>
-#include <string>
-#include <vector>
-using namespace std;
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 
-Management::Management() {
+Management::Management() {        // [SDD_HLD_MGMT_001]
 }
 
-string Management::removeQuotes(string text) {
-    string cleaned = "";
+void Management::start() {        // [SDD_HLD_MGMT_002]
+    char date[50], club[50], otherinfo[50][50], menuChoice[50];
+    char inputfile[100], outputfile[100];
+    char line[128];
+    int i = 0, j = 0, k = 0;
+    int choice = 1;
 
-    for (int i = 0; i < text.length(); i++) {
-        if (text[i] != '"') {
-            cleaned += text[i];
-        }
+    printf("\n\nWhat is the date of your meeting? ");
+    fgets(date, sizeof(date), stdin);
+
+    printf("\n\nWhat club/organization is this for? ");
+    fgets(club, sizeof(club), stdin);
+
+    printf("\n\nDo you have other relevant meeting information? (1 for No, 2 for Yes): ");
+    fgets(menuChoice, sizeof(menuChoice), stdin);
+    choice = strtol(menuChoice, NULL, 10);
+
+    while (choice != 1 && choice != 2) {
+        printf("\n\nInvalid input. Please enter either 1 or 2: ");
+        fgets(menuChoice, sizeof(menuChoice), stdin);
+        choice = strtol(menuChoice, NULL, 10);
     }
 
-    return cleaned;
-}
+    if (choice != 1) {
+        printf("\n\nContinue adding items or enter 1 when finished: ");
 
-void Management::start() {
-    string date;
-    string club;
-    string menuChoice;
-    string inputfile;
-    string outputfile;
-    vector<string> otherInfo;
+        while (choice != 1) {
+            fgets(menuChoice, sizeof(menuChoice), stdin);
+            choice = strtol(menuChoice, NULL, 10);
 
-    cout << "\nWhat is the date of your meeting? ";
-    getline(cin, date);
-
-    cout << "\nWhat club/organization is this for? ";
-    getline(cin, club);
-
-    cout << "\nDo you have other relevant meeting information? (1 for No, 2 for Yes): ";
-    getline(cin, menuChoice);
-
-    while (menuChoice != "1" && menuChoice != "2") {
-        cout << "\nInvalid input. Please enter either 1 or 2: ";
-        getline(cin, menuChoice);
-    }
-
-    if (menuChoice == "2") {
-        string info = "";
-
-        cout << "\nEnter other meeting information one line at a time.";
-        cout << "\nEnter 1 when finished:\n";
-
-        while (info != "1") {
-            getline(cin, info);
-
-            if (info != "1") {
-                otherInfo.push_back(info);
+            if (choice != 1) {
+                strcpy(otherinfo[i], menuChoice);
+                i++;
             }
         }
     }
+    // [SDD_HLD_CONFIG_001]
+    printf("\nEnter the name of the file with your attendance data: ");
+    fgets(inputfile, sizeof(inputfile), stdin);
+    inputfile[strcspn(inputfile, "\n")] = '\0';
+    // [SDD_HLD_RECORDS_001]
+    FILE *AttInputTest = fopen(inputfile, "r");
 
-    cout << "\nEnter the name of the input file: ";
-    getline(cin, inputfile);
-
-    ifstream inputFile(inputfile);
-
-    while (!inputFile) {
-        cout << "Error: Could not open input file.\n";
-        cout << "Enter the name of the input file: ";
-        getline(cin, inputfile);
-        inputFile.open(inputfile);
+    while (AttInputTest == NULL) {
+        printf("Error: Could not open input file.\n");
+        printf("Enter the name of the file with your attendance data: ");
+        fgets(inputfile, sizeof(inputfile), stdin);
+        inputfile[strcspn(inputfile, "\n")] = '\0';
+        AttInputTest = fopen(inputfile, "r");
     }
 
-    cout << "\nEnter the name of the output file: ";
-    getline(cin, outputfile);
+    fclose(AttInputTest);
 
-    ofstream outputFile(outputfile);
+    printf("\nFinally, which file should we write to? ");
+    fgets(outputfile, sizeof(outputfile), stdin);
+    outputfile[strcspn(outputfile, "\n")] = '\0';
 
-    if (!outputFile) {
-        cout << "Error: Could not open output file.\n";
+    FILE *AttInput = fopen(inputfile, "r");
+
+    if (AttInput == NULL) {
+        printf("Error: Could not open input file.\n");
         return;
     }
 
-    AttendanceProcessor processor;
-
-    string line;
-    string timestamp;
-    string name;
-    string email;
-    int invalidCount = 0;
-    int lineNumber = 0;
-
-    outputFile << "\"Timestamp\",\"First and last name\",\"ERAU Email\"\n";
-
-    while (getline(inputFile, line)) {
-        stringstream ss(line);
-
-        getline(ss, timestamp, ',');
-        getline(ss, name, ',');
-        getline(ss, email);
-
-        timestamp = removeQuotes(timestamp);
-        name = removeQuotes(name);
-        email = removeQuotes(email);
-
-        if (lineNumber != 0) {
-            if (processor.processEntry(name, email)) {
-                outputFile << "\"" << timestamp << "\",\"" << name << "\",\"" << email << "\"\n";
-            }
-            else {
-                invalidCount++;
-            }
-        }
-
-        lineNumber++;
-    }
-
-    outputFile << "\nDate: " << date << endl;
-    outputFile << "Club: " << club << endl;
-
-    if (otherInfo.size() > 0) {
-        outputFile << "\nOther Info:\n";
-
-        for (int i = 0; i < otherInfo.size(); i++) {
-            outputFile << otherInfo[i] << endl;
+    while (fgets(line, sizeof(line), AttInput) != NULL && j < 100) {
+        if (sscanf(line, "%127[^,],%127[^,],%127[^\n]", timestamps[j], names[j], emails[j]) == 3) {
+            j++;
         }
     }
 
-    inputFile.close();
-    outputFile.close();
+    fclose(AttInput);
 
-    cout << "\nAttendance form created successfully as " << outputfile << endl;
-    cout << invalidCount << " invalid entries were found.\n";
+    int badPositions[100];
+    // [SDD_HLD_SYST_002]
+    int badCount = attendanceProcessor(j, badPositions);
+
+    // [SDD_HLD_EXPORT_001]
+    FILE *AttForm = fopen(outputfile, "w");
+
+    if (AttForm == NULL) {
+        printf("Error: Could not open output file.\n");
+        return;
+    }
+
+    for (k = 0; k < j; k++) {
+        if (badPositions[k] == 0) {
+            fprintf(AttForm, "\"%s\",\"%s\",\"%s\"\n", timestamps[k], names[k], emails[k]);
+        }
+    }
+
+    fprintf(AttForm, "\nDate: %s", date);
+    fprintf(AttForm, "Club: %s", club);
+
+    if (i > 0) {
+        fprintf(AttForm, "\nOther Info:\n");
+
+        for (k = 0; k < i; k++) {
+            fprintf(AttForm, "%s", otherinfo[k]);
+        }
+    }
+
+    fclose(AttForm);
+
+    printf("\nProcessing complete. %d invalid entries found.\n", badCount);
 }

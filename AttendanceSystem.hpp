@@ -6,6 +6,8 @@
 #include <vector>
 using namespace std;
 
+// [SDD_HLD_SYST_001]
+// [SDD_HLD_SYST_002]
 class AttendanceSystem {
 private:
     AttendanceRecord attendanceRecord;

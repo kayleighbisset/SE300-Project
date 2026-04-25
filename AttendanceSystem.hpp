@@ -1,9 +1,9 @@
 #ifndef ATTENDANCESYSTEM_HPP
 #define ATTENDANCESYSTEM_HPP
 
-#include <cstring>
-#include <vector>
 #include "AttendanceRecord.hpp"
+#include <string>
+#include <vector>
 using namespace std;
 
 class AttendanceSystem {

@@ -1,27 +1,25 @@
-#ifndef ATTENDANCERECORD_HPP
-#define ATTENDANCERECORD_HPP
+#ifndef ATTENDANCEPROCESSOR_HPP
+#define ATTENDANCEPROCESSOR_HPP
 
-#include <iostream>
 #include <string>
 #include <vector>
 using namespace std;
 
-class AttendanceRecord {
+class AttendanceProcessor {
 private:
-  string attendeeName;
-  string attendeeEmail;
-  string eventTitle;
-  string eventDate;
-  vector<string> customFields;
-public:
-  AttendanceRecord();
-  AttendanceRecord(string name, string email, string title, string date, vector<string> fields); //default constructor
+    vector<string> validNames;
+    vector<string> validEmails;
 
-  //getter functions
-  string getAttendeeName();
-  string getAttendeeEmail();
-  string getEventTitle();
-  string getEventDate();
-  vector<string> getCustomFields();
+    bool duplicateNameChecker(string name);
+    bool duplicateEmailChecker(string email);
+    bool validEmailDomain(string email);
+
+public:
+    AttendanceProcessor();
+
+    bool processEntry(string name, string email);
+    vector<string> getValidNames();
+    vector<string> getValidEmails();
 };
+
 #endif

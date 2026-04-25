@@ -1,14 +1,13 @@
 #include "AttendanceRecord.hpp"
-#include <vector>
 
-AttendanceRecord::AttendanceRecord() { //intializing
+AttendanceRecord::AttendanceRecord() {
     attendeeName = "";
     attendeeEmail = "";
     eventTitle = "";
     eventDate = "";
 }
 
-AttendanceRecord::AttendanceRecord(string name, string email, string title, string date, vector<string> fields) { //default constructor WITH assigned variables
+AttendanceRecord::AttendanceRecord(string name, string email, string title, string date, vector<string> fields) {
     attendeeName = name;
     attendeeEmail = email;
     eventTitle = title;

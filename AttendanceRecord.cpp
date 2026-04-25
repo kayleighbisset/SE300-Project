@@ -6,7 +6,7 @@ AttendanceRecord::AttendanceRecord() {
     eventTitle = "";
     eventDate = "";
 }
-
+// [SDD_HLD_RECORDS_001]
 AttendanceRecord::AttendanceRecord(string name, string email, string title, string date, vector<string> fields) {
     attendeeName = name;
     attendeeEmail = email;

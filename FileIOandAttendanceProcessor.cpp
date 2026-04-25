@@ -20,6 +20,8 @@ bool duplicateChecker(char list[][128], char *value, int count) {
     return false;
 }
 
+// [SDD_HLD_PRO_001]
+// [SDD_HLD_PRO_002]
 int attendanceProcessor(int count, int badPositions[]) {
     int badCount = 0;
     int goodCount = 1;
@@ -27,6 +29,7 @@ int attendanceProcessor(int count, int badPositions[]) {
     int start = 0;
     const char testDomain[20] = "@my.erau.edu";
 
+    
     if ((strstr(names[0], "Name") == NULL && strstr(names[0], "name") == NULL)) {
         start = 0;
         goodCount = 0;
@@ -48,18 +51,22 @@ int attendanceProcessor(int count, int badPositions[]) {
         strcpy(currentName, names[i]);
         strcpy(currentEmail, emails[i]);
 
+        // [SDD_HLD_DUP_002]
         if (duplicateChecker(nameList, currentName, goodCount)) {
             valid = false;
         }
 
+        // [SDD_HLD_PRO_001]
         if (strstr(currentEmail, testDomain) == NULL) {
             valid = false;
         }
 
+        // [SDD_HLD_DUP_002]
         if (duplicateChecker(emailList, currentEmail, goodCount)) {
             valid = false;
         }
 
+        // [SDD_HLD_PRO_002]
         if (valid) {
             strcpy(nameList[goodCount], currentName);
             strcpy(emailList[goodCount], currentEmail);

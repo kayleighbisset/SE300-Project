@@ -12,21 +12,21 @@ Compile and run the program.
 Enter the meeting date, club name, and any extra meeting information when prompted.
 After the program runs, check for the output file named 
 
-How to Run
+How to Run: 
 After starting the program, the user will be prompted to enter:
 
 The date of the meeting
 The club or organization name
 Any other relevant meeting information
 
-Limitations
+Limitations: 
 This implementation does not currently support:
 
 QR code generation
 Google Forms integration
 Login or role-based access control
 
-Expected Output
+Expected Output: 
 If the program runs correctly, it will display:
 
 

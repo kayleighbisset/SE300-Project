@@ -1,4 +1,3 @@
-// SE300 Project!!!!!!!!!!!!!!!!!!!!!! IM GOONING RN
 #include "Management.hpp"
 #include <iostream>
 #include <cstdlib>
